@@ -4,6 +4,7 @@
 /app/config/local
 /app/config/staging
 /app/config/production
+/public/builds
 composer.phar
 composer.lock
 .DS_Store
