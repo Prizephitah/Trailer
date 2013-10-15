@@ -1,0 +1,9 @@
+/bootstrap/compiled.php
+/vendor
+/nbproject
+/app/config/local
+/app/config/staging
+/app/config/production
+composer.phar
+composer.lock
+.DS_Store
