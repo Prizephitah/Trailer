@@ -6,7 +6,12 @@
 		<h1>Fordonsbokning</h1>
 		<div class="row">
 			<div class="col-md-8">
-				<p>Här kan du organisera och boka dina gruppers olika gemensamma fordon.</p>
+				<p>
+					Här kan du organisera och boka dina gruppers olika gemensamma fordon.
+				</p>
+				<p>
+					<a href="{{ url('/sign-up') }}">Skapa</a> ditt konto nu!
+				</p>
 			</div>
 			<div class="col-md-4">
 				<form action="{{ url('/login') }}" method="post">
@@ -20,7 +25,7 @@
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="remember-me" class="input-group-sm"/> Kom ihåg mig
+							<input type="checkbox" name="remember-me" /> Kom ihåg mig
 						</label>
 					</div>
 

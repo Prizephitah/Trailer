@@ -15,3 +15,8 @@ Route::get('/', function() {
 	return View::make('public/login')
 			->with('title', 'Inloggning');
 });
+
+Route::get('/sign-up', function() {
+	return View::make('public/sign-up')
+			->with('title', 'Bli medlem');
+});
