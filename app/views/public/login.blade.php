@@ -18,6 +18,11 @@
 						<label for="login-password">Lösenord</label>
 						<input type="password" name="password" id="login-password" class="form-control" placeholder="Lösenord" />
 					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="remember-me" class="input-group-sm"/> Kom ihåg mig
+						</label>
+					</div>
 
 					<button type="submit" class="btn btn-primary">Logga in</button>
 				</form>
@@ -34,7 +39,7 @@
 				använda utan kostnad.
 			</p>
 		</div>
-		<div class="col-md6">
+		<div class="col-md-6">
 			<h3>Källkod</h3>
 			<p>Bokningssystemet är byggt på öppen källkod och bygger i grund och botten på Laravel 4.</p>
 		</div>
