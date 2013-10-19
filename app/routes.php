@@ -22,3 +22,9 @@ Route::get('/sign-up', function() {
 });
 
 Route::post('/sign-up', 'SecurityController@signUp');
+
+Route::post('/login', 'SecurityController@login');
+
+Route::get('/dashboard', function() {
+	return View::make('dashboard')->with('title', 'Kontrollpanel');
+});

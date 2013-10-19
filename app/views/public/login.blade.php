@@ -17,6 +17,9 @@
 				@if(Session::has('success'))
 					<div class="alert alert-success">{{ Session::get('success') }}</div>
 				@endif
+				@if(Session::has('danger'))
+					<div class="alert alert-danger">{{ Session::get('danger') }}</div>
+				@endif
 				<form action="{{ url('/login') }}" method="post">
 					<div class="form-group">
 						<label for="login-email">E-postadress</label>
@@ -32,6 +35,7 @@
 						</label>
 					</div>
 
+					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<button type="submit" class="btn btn-primary">Logga in</button>
 				</form>
 			</div>
