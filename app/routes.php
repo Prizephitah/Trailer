@@ -20,3 +20,5 @@ Route::get('/sign-up', function() {
 	return View::make('public/sign-up')
 			->with('title', 'Bli medlem');
 });
+
+Route::post('/sign-up', 'SecurityController@signUp');

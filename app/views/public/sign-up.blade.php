@@ -3,6 +3,7 @@
 @section('content')
 @include('public/navbar')
 <div class="container">
+	<h1>Skapa ett nytt konto</h1>
 	<form action="{{ url('/sign-up') }}" method="post">
 		<div class="form-group">
 			<label for="signup-email">E-postadress</label>
@@ -26,7 +27,8 @@
 			<span class="help-block">Vad du normalt brukar kallas. Det måste inte vara något särskilt smeknamn utan bara vad du brukar kallas i vardagligt tal.</span>
 		</div>
 		
-		<button type="submit" class="btn btn-success">Skapa konto</button>
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		<button type="submit" class="btn btn-success">Skapa</button>
 	</form>
 </div>
 @stop
