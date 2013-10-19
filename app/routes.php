@@ -11,20 +11,20 @@
 |
 */
 
-Route::get('/', function() {
+Route::get('/login', array('before' => 'guest', 'do' => function() {
 	return View::make('public/login')
 			->with('title', 'Inloggning');
-});
+}));
 
-Route::get('/sign-up', function() {
+Route::get('/sign-up', array('before' => 'guest', 'do' => function() {
 	return View::make('public/sign-up')
 			->with('title', 'Bli medlem');
-});
+}));
 
 Route::post('/sign-up', 'SecurityController@signUp');
 
 Route::post('/login', 'SecurityController@login');
 
-Route::get('/dashboard', function() {
+Route::get('/', array('before' => 'auth', 'do' => function() {
 	return View::make('dashboard')->with('title', 'Kontrollpanel');
-});
+}));

@@ -9,6 +9,7 @@ class SecurityController extends BaseController {
 	
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on' => 'post'));
+		$this->beforeFilter('guest');
 	}
 	
 	public function signUp() {
@@ -51,7 +52,7 @@ class SecurityController extends BaseController {
 		);
 		
 		if (Auth::attempt($user, Input::has('remember-me'))) {
-			return Redirect::to('/dashboard')->with('info', 'Du har loggat in.')->withInput(Input::only('email'));
+			return Redirect::intended('/')->with('info', 'Du har loggat in.')->withInput(Input::only('email'));
         }
         
         // authentication failure! lets go back to the login page

@@ -20,6 +20,9 @@
 				@if(Session::has('danger'))
 					<div class="alert alert-danger">{{ Session::get('danger') }}</div>
 				@endif
+				@if(Session::has('warning'))
+					<div class="alert alert-warning">{{ Session::get('warning') }}</div>
+				@endif
 				<form action="{{ url('/login') }}" method="post">
 					<div class="form-group">
 						<label for="login-email">E-postadress</label>
