@@ -23,20 +23,22 @@
 				<form action="{{ url('/login') }}" method="post">
 					<div class="form-group">
 						<label for="login-email">E-postadress</label>
-						<input type="email" name="email" id="login-email" class="form-control" placeholder="E-postadress" />
+						<input type="email" name="email" id="login-email" class="form-control" 
+							   placeholder="E-postadress" value="{{{ Input::old('email') }}}" tabindex="1" />
 					</div>
 					<div class="form-group">
 						<label for="login-password">Lösenord</label>
-						<input type="password" name="password" id="login-password" class="form-control" placeholder="Lösenord" />
+						<input type="password" name="password" id="login-password" class="form-control" 
+							   placeholder="Lösenord" tabindex="2" />
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="remember-me" /> Kom ihåg mig
+							<input type="checkbox" name="remember-me" tabindex="3" /> Kom ihåg mig
 						</label>
 					</div>
 
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-					<button type="submit" class="btn btn-primary">Logga in</button>
+					<button type="submit" class="btn btn-primary" tabindex="4">Logga in</button>
 				</form>
 			</div>
 		</div>
