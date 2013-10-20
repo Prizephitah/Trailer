@@ -12,6 +12,48 @@
 	@if(Session::has('info'))
 		<div class="alert alert-info">{{ Session::get('info') }}</div>
 	@endif
+	<div class="row">
+		<div class="col-md-6">
+			<div class="page-header">
+				<h2>
+					Dina grupper
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default join-group" 
+								data-href="{{ action('GroupController@index') }}">Gå med i annan</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ action('GroupController@create') }}">Skapa ny</a></li>
+						</ul>
+					</div>
+				</h2>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<h3>Grupp 1</h3>
+					<p>Beskrivning</p>
+					<h4>Medlemmar</h4>
+					<ul>
+						<li>Användare 1</li>
+					</ul>
+				</li>
+				<li class="list-group-item">
+					<h3>Grupp 2</h3>
+					<p>Beskrivning</p>
+					<h4>Medlemmar</h4>
+					<ul>
+						<li>Användare 2</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<div class="page-header">
+				<h2>Kommande bokningar</h2>
+			</div>
+		</div>
+	</div>
 </div>
 @stop
 

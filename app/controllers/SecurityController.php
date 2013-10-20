@@ -42,7 +42,7 @@ class SecurityController extends BaseController {
 		$user->created = new DateTime();
 		$user->save();
 		
-		return Redirect::to('/')->with('success', '<strong>Konto skapat!</strong> Du kan nu logga in.');
+		return Redirect::to('/login')->with('success', '<strong>Konto skapat!</strong> Du kan nu logga in.');
 	}
 	
 	public function login() {
@@ -56,7 +56,7 @@ class SecurityController extends BaseController {
         }
         
         // authentication failure! lets go back to the login page
-        return Redirect::to('/')
+        return Redirect::to('/login')
             ->with('danger', '<strong>Felaktig inloggning!</strong><br>Ditt användarnamn och/eller lösenord var felaktigt. Var vänlig försök igen.')
             ->withInput();
 	}

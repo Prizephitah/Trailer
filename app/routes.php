@@ -28,3 +28,5 @@ Route::post('/login', 'SecurityController@login');
 Route::get('/', array('before' => 'auth', 'do' => function() {
 	return View::make('dashboard')->with('title', 'Kontrollpanel');
 }));
+
+Route::resource('/group', 'GroupController');
