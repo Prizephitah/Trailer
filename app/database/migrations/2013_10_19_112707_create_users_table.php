@@ -12,6 +12,8 @@ class CreateUsersTable extends Migration {
 	public function up()
 	{
 		Schema::create('users', function($t) {
+			$t->engine = 'InnoDB';
+			
 			$t->increments('id');
 			$t->string('email', 255);
 			$t->string('password', 64);
@@ -19,7 +21,9 @@ class CreateUsersTable extends Migration {
 			$t->string('alias', 255);
 			$t->dateTime('created');
 			$t->dateTime('updated')->nullable();
+			
 			$t->softDeletes();
+			$t->unique('email');
         });
 	}
 
