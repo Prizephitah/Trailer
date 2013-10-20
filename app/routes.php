@@ -26,7 +26,12 @@ Route::post('/sign-up', 'SecurityController@signUp');
 Route::post('/login', 'SecurityController@login');
 
 Route::get('/', array('before' => 'auth', 'do' => function() {
-	return View::make('dashboard')->with('title', 'Kontrollpanel');
+	$self = Auth::user();
+	$self->load('groups');
+	return View::make('dashboard', array(
+		'title' => 'Kontrollpanel',
+		'self' => $self
+	));
 }));
 
 Route::resource('/group', 'GroupController');

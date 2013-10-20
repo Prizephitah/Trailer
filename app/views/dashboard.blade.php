@@ -30,22 +30,18 @@
 				</h2>
 			</div>
 			<ul class="list-group">
+				@foreach ($self->groups as $group)
 				<li class="list-group-item">
-					<h3>Grupp 1</h3>
-					<p>Beskrivning</p>
+					<h3>{{{ $group->name }}}</h3>
+					<p>{{{ $group->description }}}</p>
 					<h4>Medlemmar</h4>
 					<ul>
-						<li>Användare 1</li>
+						@foreach ($group->users as $user)
+						<li>{{{ $user->alias }}}</li>
+						@endforeach
 					</ul>
 				</li>
-				<li class="list-group-item">
-					<h3>Grupp 2</h3>
-					<p>Beskrivning</p>
-					<h4>Medlemmar</h4>
-					<ul>
-						<li>Användare 2</li>
-					</ul>
-				</li>
+				@endforeach
 			</ul>
 		</div>
 		<div class="col-md-6">
