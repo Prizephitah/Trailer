@@ -16,11 +16,11 @@ class Group extends Eloquent {
 	public $timestamps = false;
 	
 	public function createdBy() {
-		return $this->belongsTo('User', 'created_by');
+		return User::find($this->created_by);
 	}
 	
 	public function updatedBy() {
-		return $this->belongsTo('User', 'updated_by');
+		return User::find($this->updated_by);
 	}
 	
 	public function users() {
