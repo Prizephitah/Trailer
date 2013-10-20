@@ -81,8 +81,3 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-
-Basset::collection('application', function($collection) {
-	$collection->add('../vendor/twitter/bootstrap/less/bootstrap.less');
-	$collection->add('../public/assets/stylesheets/less/bootstrap-overrides.less');
-})->apply('Less');
