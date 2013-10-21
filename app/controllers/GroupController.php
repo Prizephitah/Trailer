@@ -46,4 +46,9 @@ class GroupController extends BaseController {
 	public function index() {
 		return View::make('group/join')->with('title', 'Gå med i befintlig grupp');
 	}
+	
+	public function show($id) {
+		$group = Group::with('users')->where('id', '=', $id)->first();
+		return View::make('group/show')->with('title', 'Visa grupp: '.e($group->name))->with('group', $group);
+	}
 }

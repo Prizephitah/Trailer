@@ -32,7 +32,9 @@
 			<ul class="list-group">
 				@foreach ($self->groups as $group)
 				<li class="list-group-item">
-					<h3>{{{ $group->name }}}</h3>
+					<h3><a href="{{ action('GroupController@show', array($group->id)) }}">
+						{{{ $group->name }}}
+					</a></h3>
 					<p>{{{ $group->description }}}</p>
 					<h4>Medlemmar</h4>
 					<ul>
