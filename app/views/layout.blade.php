@@ -6,6 +6,7 @@
 		<title>{{ $title }} - Bokning</title>
 		@stylesheets('application')
 		@javascripts('application')
+		<link href="{{ asset('assets/fonts/fonts.css') }}" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		@yield('content')
