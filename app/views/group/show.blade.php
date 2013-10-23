@@ -9,6 +9,9 @@
 	@if(Session::has('danger'))
 		<div class="alert alert-danger">{{ Session::get('danger') }}</div>
 	@endif
+	@if(Session::has('info'))
+		<div class="alert alert-info">{{ Session::get('info') }}</div>
+	@endif
 				
 	<div class="page-header">
 		<h1>{{{ $group->name }}}</h1>
