@@ -25,6 +25,27 @@
 				<span class="help-block">{{ $error }}</span>
 			@endforeach
 		</div>
+		<div class="form-group @if ($errors->has('description')) has-error @endif">
+			<label>Behörigheter</label>
+			<table class="table table-hover">
+				<tr>
+					<th>Namn</th>
+					<th class="hidden-xs">Kortnamn</th>
+					<th>E-postadress</th>
+					<th>Administratör</th>
+				</tr>
+				@foreach ($group->users as $user)
+				<tr>
+					<td>{{{ $user->name }}}</td>
+					<td class="hidden-xs">{{{ $user->alias }}}</td>
+					<td>{{{ $user->email }}}</td>
+					<td>
+						<input type="checkbox" name="admins[{{ $user->id }}]" @if ($user->pivot->admin) checked @endif />
+					</td>
+				</tr>
+				@endforeach
+			</table>
+		</div>
 		
 		<p>
 			<button type="submit" class="btn btn-primary" tabindex="3">Uppdatera</button>
