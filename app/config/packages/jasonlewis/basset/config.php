@@ -33,6 +33,8 @@ return array(
 			$collection->stylesheet('../vendor/twitter/bootstrap/less/bootstrap.less')->apply('Less');
 			$collection->javascript('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js');
 			$collection->javascript('../vendor/twitter/bootstrap/js/dropdown.js');
+			$collection->javascript('../vendor/twitter/bootstrap/js/transition.js');
+			$collection->javascript('../vendor/twitter/bootstrap/js/collapse.js');
 	
             // Switch to the stylesheets directory and require the "less" and "sass" directories.
             // These directories both have a filter applied to them so that the built
