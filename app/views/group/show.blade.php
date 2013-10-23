@@ -18,7 +18,7 @@
 		<div class="col-md-6">
 			<dl>
 				<dt>Skapad</dt>
-				<dd>{{ date('Y-m-d H:i', strtotime($group->created)) }}</dd>
+				<dd>{{ date('Y-m-d', strtotime($group->created)) }}</dd>
 			</dl>
 		</div>
 		<div class="col-md-6">
@@ -39,7 +39,7 @@
 		<div class="col-md-6">
 			<dl>
 				<dt>Uppdaterad</dt>
-				<dd>{{ date('Y-m-d H:i', strtotime($group->updated)) }}</dd>
+				<dd>{{ date('Y-m-d', strtotime($group->updated)) }}</dd>
 			</dl>
 		</div>
 		<div class="col-md-6">
@@ -86,12 +86,19 @@
 		</div>
 	@endif
 	</div>
-	@if ($isAdmin)
 	<p>
+		<div id="csrf-token">{{ csrf_token() }}</div>
+	@if ($isAdmin)
 		<button class="btn btn-primary admin-group" data-href="{{ action('GroupController@edit', array($group->id)) }}">
 			<span class="glyphicon glyphicon-cog"></span> Administrera
 		</button>
-	</p>
 	@endif
+	@if ($isMember)
+		<button class="btn btn-warning">Gå ur</button>
+	@else
+		<button class="btn btn-primary join-group" 
+				data-href="{{ action('GroupController@join', array($group->id)) }}">Gå med</button>
+	@endif
+	</p>
 </div>
 @stop

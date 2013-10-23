@@ -44,7 +44,8 @@ class GroupController extends BaseController {
 	}
 	
 	public function index() {
-		return View::make('group/join')->with('title', 'Gå med i befintlig grupp');
+		$groups = Group::all();
+		return View::make('group/join')->with('title', 'Gå med i befintlig grupp')->with('groups', $groups);
 	}
 	
 	public function show($id) {
@@ -131,5 +132,19 @@ class GroupController extends BaseController {
 		$group->delete();
 		
 		return Redirect::to('/')->with('success', 'Gruppen "'.e($group->name).'" togs bort!');
+	}
+	
+	public function join($id) {
+		$group = Group::with('users')->where('id', '=', $id)->first();
+		if ($group == null) {
+			return App::abort(404, 'Gruppen finns inte');
+		}
+		if ($group->users->contains(Auth::user()->id)) {
+			return Redirect::action('GroupController@show', array($id))->with('info', 'Du är redan medlem!');
+		}
+		
+		$group->users()->attach(Auth::user());
+		$group->save();
+		return Redirect::action('GroupController@show', array($id))->with('success', 'Du är nu medlem!');
 	}
 }
