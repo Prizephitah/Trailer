@@ -3,6 +3,13 @@
 @section('content')
 @include('navbar')
 <div class="container">
+	@if(Session::has('success'))
+		<div class="alert alert-success">{{ Session::get('success') }}</div>
+	@endif
+	@if(Session::has('danger'))
+		<div class="alert alert-danger">{{ Session::get('danger') }}</div>
+	@endif
+				
 	<div class="page-header">
 		<h1>{{{ $group->name }}}</h1>
 	</div>
@@ -81,7 +88,7 @@
 	</div>
 	@if ($isAdmin)
 	<p>
-		<button class="btn btn-primary" data-href="{{ action('GroupController@edit', array($group->id)) }}">
+		<button class="btn btn-primary admin-group" data-href="{{ action('GroupController@edit', array($group->id)) }}">
 			<span class="glyphicon glyphicon-cog"></span> Administrera
 		</button>
 	</p>

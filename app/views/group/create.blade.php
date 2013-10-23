@@ -19,8 +19,8 @@
 		</div>
 		<div class="form-group @if ($errors->has('description')) has-error @endif">
 			<label for="creategroup-description">Beskrivning</label>
-			<textarea name="description" id="creategroup-description" class="form-control" value="{{{ Input::old('description') }}}"
-					  tabindex="2" cols="5"></textarea>
+			<textarea name="description" id="creategroup-description" class="form-control" tabindex="2" cols="5"
+					  >{{{ Input::old('description') }}}</textarea>
 			<?php
 				foreach ($errors->get('description') as $error) {
 					echo '<span class="help-block">'.$error.'</span>';
