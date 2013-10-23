@@ -101,6 +101,8 @@ class GroupController extends BaseController {
 		
 		$group->name = Input::get('name');
 		$group->description = Input::get('description');
+		$group->updated = new DateTime();
+		$group->updated_by = Auth::user()->id;
 		$admins = 0;
 		foreach (Input::get('admins') as $userId => $options) {
 			$group->users->find($userId)->pivot->admin = isset($options['admin']);
