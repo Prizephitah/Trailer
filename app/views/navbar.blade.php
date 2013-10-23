@@ -12,8 +12,12 @@
 		
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="{{ url('/') }}">Kontrollpanel</a></li>
-				<li><a href="{{ action('GroupController@index') }}">Grupper</a></li>
+				<li><a href="{{ url('/') }}">
+					<span class="glyphicon glyphicon-dashboard visible-xs-inline"></span> Kontrollpanel
+				</a></li>
+				<li><a href="{{ action('GroupController@index') }}">
+					<span class="glyphicon glyphicon-link visible-xs-inline"></span> Grupper
+				</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
