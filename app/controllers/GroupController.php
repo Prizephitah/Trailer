@@ -73,4 +73,46 @@ class GroupController extends BaseController {
 		}
 		return View::make('group/edit')->with('title', 'Administrera grupp: '.e($group->name))->with('group', $group);
 	}
+	
+	public function update($id) {
+		$group = Group::with('users')->where('id', '=', $id)->first();
+		if ($group == null) {
+			return App::abort(404, 'Gruppen finns inte');
+		}
+		$isMember = $group->users->contains(Auth::user()->id);
+		if (!$isMember || !(bool)$group->users->find(Auth::user()->id)->pivot->admin) {
+			return Redirect::action('GroupController@show', array($group->id))
+					->with('danger', 'Du saknar behörighet för att administrera gruppen!');
+		}
+		
+		$rules = array(
+			'name' => 'required|max:255'
+		);
+		$messages = array(
+			'required' => 'Fältet är obligatoriskt.',
+			'unique' => 'En grupp med det angivna namnet finns redan.',
+			'max' => 'Fältet får inte innehålla fler än :max tecken.'
+		);
+		
+		$validator = Validator::make(Input::all(), $rules, $messages);
+		if ($validator->fails()) {
+			return Redirect::action('GroupController@edit')->withErrors($validator)->withInput(Input::all());
+		}
+		
+		$group->name = Input::get('name');
+		$group->description = Input::get('description');
+		$admins = 0;
+		foreach (Input::get('admins') as $userId => $options) {
+			$group->users->find($userId)->pivot->admin = isset($options['admin']);
+			if (isset($options['admin'])) { $admins++; }
+		}
+		if ($admins === 0) {
+			return Redirect::action('GroupController@edit', array($id))
+					->with('danger', 'Det måste finnas minst en administratör!')->withInput(Input::all());
+		}
+		
+		$group->push();
+		
+		return Redirect::action('GroupController@show', array($id))->with('success', 'Ändringar sparade!');
+	}
 }

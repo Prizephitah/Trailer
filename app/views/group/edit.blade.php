@@ -3,10 +3,13 @@
 @section('content')
 @include('navbar')
 <div class="container">
+	@if(Session::has('danger'))
+		<div class="alert alert-danger">{{ Session::get('danger') }}</div>
+	@endif
 	<div class="page-header">
 		<h1>Administrera grupp <small>{{{ $group->name }}}</small></h1>
 	</div>
-	<form action="{{ action('GroupController@edit', array($group->id)) }}">
+	<form action="{{ action('GroupController@update', array($group->id)) }}" method="post">
 		<input type="hidden" name="_method" value="PUT" />
 		
 		<div class="form-group @if ($errors->has('name')) has-error @endif">
@@ -40,7 +43,8 @@
 					<td class="hidden-xs">{{{ $user->alias }}}</td>
 					<td>{{{ $user->email }}}</td>
 					<td>
-						<input type="checkbox" name="admins[{{ $user->id }}]" @if ($user->pivot->admin) checked @endif />
+						<input type="hidden" name="admins[{{ $user->id }}][dummy]" value="dummy" />
+						<input type="checkbox" name="admins[{{ $user->id }}][admin]" @if ($user->pivot->admin) checked @endif />
 					</td>
 				</tr>
 				@endforeach
