@@ -18,7 +18,7 @@
 			<dl>
 				<dt>Skapad av</dt>
 				<dd>
-					@if ($group->users->contains(Auth::user()->id))
+					@if ($isMember)
 						{{{ $group->createdBy()->name }}}
 					@else
 						{{{ $group->createdBy()->alias }}}
@@ -39,7 +39,7 @@
 			<dl>
 				<dt>Uppdaterad av</dt>
 				<dd>
-					@if ($group->users->contains(Auth::user()->id))
+					@if ($isMember)
 						{{{ $group->updatedBy()->name }}}
 					@else
 						{{{ $group->updatedBy()->alias }}}
@@ -49,27 +49,42 @@
 		</div>
 	</div>
 	@endif
-	@if ($group->users->contains(Auth::user()->id))
-		<h2>Medlemmar</h2>
-		<table class="table table-hover">
-			<tr>
-				<th>Namn</th>
-				<th>E-postadress</th>
-				<th>Administratör</th>
-			</tr>
-			@foreach ($group->users as $user)
-			<tr>
-				<td>{{{ $user->name }}}</td>
-				<td>{{{ $user->email }}}</td>
-				<td>@if ($user->pivot->admin) <span class="glyphicon glyphicon-ok-sign"></span> @endif</td>
-			</tr>
-			@endforeach
-		</table>
+	<div class="row">
+	@if ($isMember)
+		<div class="col-md-12">
+			<h2>Medlemmar</h2>
+			<table class="table table-hover">
+				<tr>
+					<th>Namn</th>
+					<th class="hidden-xs">Kortnamn</th>
+					<th>E-postadress</th>
+					<th>Administratör</th>
+				</tr>
+				@foreach ($group->users as $user)
+				<tr>
+					<td>{{{ $user->name }}}</td>
+					<td class="hidden-xs">{{{ $user->alias }}}</td>
+					<td>{{{ $user->email }}}</td>
+					<td>@if ($user->pivot->admin) <span class="glyphicon glyphicon-ok-sign"></span> @endif</td>
+				</tr>
+				@endforeach
+			</table>
+		</div>
 	@else
-		<dl>
-			<dt>Medlemmar</dt>
-			<dd>{{ count($group->users) }}st.</dd>
-		</dl>
+		<div class="col-md-6">
+			<dl>
+				<dt>Medlemmar</dt>
+				<dd>{{ count($group->users) }}st.</dd>
+			</dl>
+		</div>
+	@endif
+	</div>
+	@if ($isAdmin)
+	<p>
+		<button class="btn btn-primary" data-href="{{ action('GroupController@edit', array($group->id)) }}">
+			<span class="glyphicon glyphicon-cog"></span> Administrera
+		</button>
+	</p>
 	@endif
 </div>
 @stop

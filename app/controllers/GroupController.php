@@ -49,6 +49,19 @@ class GroupController extends BaseController {
 	
 	public function show($id) {
 		$group = Group::with('users')->where('id', '=', $id)->first();
-		return View::make('group/show')->with('title', 'Visa grupp: '.e($group->name))->with('group', $group);
+		if ($group == null) {
+			return App::abort(404, 'Gruppen finns inte');
+		}
+		$isMember = $group->users->contains(Auth::user()->id);
+		$isAdmin = false;
+		if ($isMember) {
+			$isAdmin = (bool)$group->users->find(Auth::user()->id)->pivot->admin;
+		}
+		return View::make('group/show')->with('title', 'Visa grupp: '.e($group->name))->with('group', $group)
+			->with('isAdmin', $isAdmin)->with('isMember', $isMember);
+	}
+	
+	public function edit($id) {
+		
 	}
 }
