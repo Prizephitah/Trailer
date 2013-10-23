@@ -53,7 +53,10 @@
 		
 		<p>
 			<button type="submit" class="btn btn-primary" tabindex="3">Uppdatera</button>
-			<button class="btn btn-danger delete-group" tabindex="4">Ta bort</button>
+			<button class="btn btn-danger delete-group" tabindex="4" 
+					data-href="{{ action('GroupController@destroy', array($group->id)) }}">
+				Ta bort
+			</button>
 		</p>
 	</form>
 </div>

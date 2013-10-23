@@ -115,4 +115,19 @@ class GroupController extends BaseController {
 		
 		return Redirect::action('GroupController@show', array($id))->with('success', 'Ändringar sparade!');
 	}
+	
+	public function destroy($id) {
+		$group = Group::with('users')->where('id', '=', $id)->first();
+		if ($group == null) {
+			return App::abort(404, 'Gruppen finns inte');
+		}
+		$isMember = $group->users->contains(Auth::user()->id);
+		if (!$isMember || !(bool)$group->users->find(Auth::user()->id)->pivot->admin) {
+			return Redirect::action('GroupController@show', array($group->id))
+					->with('danger', 'Du saknar behörighet för att administrera gruppen!');
+		}
+		$group->delete();
+		
+		return Redirect::to('/')->with('success', 'Gruppen "'.e($group->name).'" togs bort!');
+	}
 }
