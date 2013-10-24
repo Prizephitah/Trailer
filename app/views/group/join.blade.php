@@ -47,5 +47,10 @@
 		</li>
 		@endforeach
 	</ul>
+	<h4>Hittade du ingen passande grupp?</h4>
+	<p>
+		Om ingen av de befintliga grupperna passar går det alltid att skapa en helt ny!<br />
+	</p>
+	<p><button class="btn btn-success create-group" data-href="{{ action('GroupController@create') }}">Skapa ny grupp</button></p>
 </div>
 @stop

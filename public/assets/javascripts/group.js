@@ -1,5 +1,17 @@
 function Group() {
+	$('.list-groups').click(function(event) {
+		event.preventDefault();
+		if ($(this).data('href')) {
+			window.location = $(this).data('href');
+		}
+	});
 	$('.admin-group').click(function(event) {
+		event.preventDefault();
+		if ($(this).data('href')) {
+			window.location = $(this).data('href');
+		}
+	});
+	$('.create-group').click(function(event) {
 		event.preventDefault();
 		if ($(this).data('href')) {
 			window.location = $(this).data('href');

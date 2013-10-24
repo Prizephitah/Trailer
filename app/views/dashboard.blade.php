@@ -18,7 +18,7 @@
 				<h2>
 					Dina grupper
 					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default join-group" 
+						<button type="button" class="btn btn-default list-groups" 
 								data-href="{{ action('GroupController@index') }}">Gå med i annan</button>
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 							<span class="caret"></span>
