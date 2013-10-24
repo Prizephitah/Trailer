@@ -35,7 +35,15 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('/login')->with('warning', 'Inloggning krävs.');
+	if (Auth::guest()) {
+		$redirect = Redirect::guest('/login');
+		if (Session::has('known_session')) {
+			$redirect->with('warning', 'Inloggning krävs.');
+		} else {
+			Session::put('known_session', true);
+		}
+		return $redirect;
+	}
 });
 
 
