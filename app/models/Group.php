@@ -27,4 +27,8 @@ class Group extends Eloquent {
 		return $this->belongsToMany('User', 'groups_users')->withPivot('admin');
 	}
 	
+	public function vehicles() {
+		return $this->hasMany('Vehicle', 'group_id');
+	}
+	
 }
