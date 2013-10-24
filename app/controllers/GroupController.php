@@ -147,4 +147,28 @@ class GroupController extends BaseController {
 		$group->save();
 		return Redirect::action('GroupController@show', array($id))->with('success', 'Du är nu medlem!');
 	}
+	
+	public function leave($id) {
+		$group = Group::with('users')->where('id', '=', $id)->first();
+		if ($group == null) {
+			return App::abort(404, 'Gruppen finns inte');
+		}
+		if (!$group->users->contains(Auth::user()->id)) {
+			return Redirect::action('GroupController@show', array($id))->with('info', 'Du kan inte gå ur en grupp du inte är medlem i!');
+		}
+		
+		$admins = DB::table('users')
+				->join('groups_users', 'users.id', '=', 'groups_users.user_id')
+				->where('groups_users.admin', '=', true)
+				->where('groups_users.group_id', '=', $group->id)
+				->lists('users.id');
+		if (count($admins) < 2 && array_search(Auth::user()->id, $admins) !== false) {
+			return Redirect::action('GroupController@show', array($id))
+					->with('danger', 'Du kan inte gå ur en grupp när du är den sista kvarvarande administratören! Lämna över administratörsrollen till någon annan medlem eller ta bort gruppen helt.');
+		}
+		
+		$group->users()->detach(Auth::user());
+		$group->save();
+		return Redirect::action('GroupController@show', array($id))->with('info', 'Du har nu gått ur gruppen!');
+	}
 }

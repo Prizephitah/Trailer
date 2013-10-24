@@ -23,6 +23,14 @@ function Group() {
 		);
 		$('#group-join-form').submit();
 	});
+	$('.leave-group').click(function(event) {
+		$('body').append(
+			$('<form>', { action: $(this).data('href'), method: 'post', id: 'group-leave-form'}).append(
+				$('<input>', { type: 'hidden', name: '_token', value: $('#csrf-token').text() })
+			)
+		);
+		$('#group-leave-form').submit();
+	});
 };
 
 var Trailer = Trailer || {};

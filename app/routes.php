@@ -36,3 +36,4 @@ Route::get('/', array('before' => 'auth', 'do' => function() {
 
 Route::resource('/group', 'GroupController');
 Route::post('/group/{id}/join', 'GroupController@join');
+Route::post('/group/{id}/leave', 'GroupController@leave');

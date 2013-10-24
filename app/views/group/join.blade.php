@@ -36,7 +36,8 @@
 			</div>
 			<div class="pull-right">
 				@if ($group->users->contains(Auth::user()->id))
-				<button class="btn btn-warning">Gå ur</button>
+				<button class="btn btn-warning leave-group"
+						data-href="{{ action('GroupController@leave', array($group->id)) }}">Gå ur</button>
 				@else
 				<button class="btn btn-primary join-group" 
 						data-href="{{ action('GroupController@join', array($group->id)) }}">Gå med</button>
