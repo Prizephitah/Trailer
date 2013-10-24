@@ -8,7 +8,7 @@
 class GroupController extends BaseController {
 	
 	public function __construct() {
-		$this->beforeFilter('csrf', array('on' => 'post'));
+		$this->beforeFilter('csrf', array('on' => array('post', 'delete', 'put')));
 		$this->beforeFilter('auth');
 	}
 	

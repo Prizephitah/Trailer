@@ -9,7 +9,8 @@ function Group() {
 		event.preventDefault();
 		$('body').append(
 			$('<form>', { action: $(this).data('href'), method: 'post', id: 'group-delete-form'}).append(
-				$('<input>', { type: 'hidden', name: '_method', value: 'DELETE' })
+				$('<input>', { type: 'hidden', name: '_method', value: 'DELETE' }),
+				$('<input>', { type: 'hidden', name: '_token', value: $('#csrf-token').val() })
 			)
 		);
 		$('#group-delete-form').submit();

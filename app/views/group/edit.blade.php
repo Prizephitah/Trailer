@@ -52,6 +52,7 @@
 		</div>
 		
 		<p>
+			<input type="hidden" name="_token" value="{{ csrf_token() }}" id="csrf-token" />
 			<button type="submit" class="btn btn-primary" tabindex="3">Uppdatera</button>
 			<button class="btn btn-danger delete-group" tabindex="4" 
 					data-href="{{ action('GroupController@destroy', array($group->id)) }}">
