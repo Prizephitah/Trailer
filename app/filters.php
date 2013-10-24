@@ -78,3 +78,16 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('groupadmin', function($route) {
+	$id = $route->getParameter('group');
+	$group = Group::with('users')->where('id', '=', $id)->first();
+	if ($group == null) {
+		return App::abort(404, 'Gruppen finns inte');
+	}
+	$isMember = $group->users->contains(Auth::user()->id);
+	if (!$isMember || !(bool)$group->users->find(Auth::user()->id)->pivot->admin) {
+		return Redirect::action('GroupController@show', array($group->id))
+				->with('danger', 'Du saknar behörighet för att administrera gruppen!');
+	}
+});
