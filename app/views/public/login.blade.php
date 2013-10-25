@@ -7,7 +7,9 @@
 		<div class="row">
 			<div class="col-md-8">
 				<p>
-					Här kan du organisera och boka dina gruppers olika gemensamma fordon.
+					Här kan du organisera och boka dina egna och vänners olika fordon för gemensam användning.
+					Användare och fordon organiseras i grupper så att det är lätt att se vilka andra som kan boka ett fordon.
+					Det är enkelt att skapa en grupp om det inte finns någon som passar just dig.
 				</p>
 				<p>
 					<a href="{{ url('/sign-up') }}">Skapa</a> ditt konto nu!
@@ -53,12 +55,20 @@
 			<h3>Tillgänglighet</h3>
 			<p>
 				Bokningssystemet är öppet för alla privatpersoner samt icke vinstdrivande organisationer att 
-				använda utan kostnad.
+				använda utan kostnad. Systemet tillhandahålls helt utan någon garanti och driftsinformation finns inte 
+				tillgänglig, men hjälp tas tacksamt emot.
 			</p>
 		</div>
 		<div class="col-md-6">
 			<h3>Källkod</h3>
-			<p>Bokningssystemet är byggt på öppen källkod och bygger i grund och botten på Laravel 4.</p>
+			<p>
+				Bokningssystemet är byggt på öppen källkod och bygger i grund och botten på 
+				<a href="http://laravel.com">Laravel 4</a> med styling via <a href="http://getbootstrap.com/">Bootstrap 3</a>.
+			</p>
+			<p>
+				Källkoden är finns publicerad på <a href="https://github.com/Prizephitah/trailer">GitHub</a>.
+				<div class="github-widget" data-repo="Prizephitah/trailer"></div>
+			</p>
 		</div>
 	</div>
 </div>
