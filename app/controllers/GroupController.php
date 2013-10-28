@@ -96,7 +96,8 @@ class GroupController extends BaseController {
 		}
 		if ($admins === 0) {
 			return Redirect::action('GroupController@edit', array($id))
-					->with('danger', 'Det måste finnas minst en administratör!')->withInput(Input::all());
+					->with('danger', 'Det måste finnas minst en administratör!')->withInput(Input::all())
+					->withErrors(array('users' => 'Det måste finnas minst en administratör!'));
 		}
 		
 		$group->push();

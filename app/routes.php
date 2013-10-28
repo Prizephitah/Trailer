@@ -39,3 +39,6 @@ Route::get('/', array('before' => 'auth', 'do' => function() {
 Route::resource('/group', 'GroupController');
 Route::post('/group/{id}/join', 'GroupController@join');
 Route::post('/group/{id}/leave', 'GroupController@leave');
+
+Route::get('/group/{group}/add-vehicle', 'VehicleController@create');
+Route::post('/group/{group}/add-vehicle', 'VehicleController@store');

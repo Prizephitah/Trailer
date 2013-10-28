@@ -28,7 +28,7 @@
 				<span class="help-block">{{ $error }}</span>
 			@endforeach
 		</div>
-		<div class="form-group @if ($errors->has('description')) has-error @endif">
+		<div class="form-group @if ($errors->has('users')) has-error @endif">
 			<label>Behörigheter</label>
 			<table class="table table-hover">
 				<tr>
@@ -49,6 +49,28 @@
 				</tr>
 				@endforeach
 			</table>
+		</div>
+		<div class="form-group clearfix">
+			<label>Fordon</label>
+			<table class="table table-hover">
+				<tr>
+					<th>Namn</th>
+					<th>Registreringsnummer</th>
+					<th colspan="2"></th>
+				</tr>
+				@foreach ($group->vehicles as $vehicle)
+				<tr data-id="{{ $vehicle->id }}">
+					<td>{{{ $vehicle->name }}}</td>
+					<td>{{{ $vehicle->license_plate }}}</td>
+					<td><button class="btn btn-primary">Administrera</td>
+					<td><button class="btn btn-danger">Ta bort</button></td>
+				</tr>
+				@endforeach
+			</table>
+			<button class="btn btn-success pull-right add-vehicle-group" 
+					data-href="{{ action('VehicleController@create', array($group->id)) }}">
+				Lägg till nytt fordon
+			</button>
 		</div>
 		
 		<p>

@@ -17,6 +17,12 @@ function Group() {
 			window.location = $(this).data('href');
 		}
 	});
+	$('.add-vehicle-group').click(function(event) {
+		event.preventDefault();
+		if ($(this).data('href')) {
+			window.location = $(this).data('href');
+		}
+	});
 	$('.delete-group').click(function(event) {
 		event.preventDefault();
 		$('body').append(
