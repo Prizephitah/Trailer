@@ -25,6 +25,8 @@ Route::post('/sign-up', 'SecurityController@signUp');
 
 Route::post('/login', 'SecurityController@login');
 
+Route::get('/logout', 'SecurityController@logout');
+
 Route::get('/', array('before' => 'auth', 'do' => function() {
 	$self = Auth::user();
 	$self->load('groups');

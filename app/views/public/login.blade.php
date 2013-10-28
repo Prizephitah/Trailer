@@ -25,6 +25,9 @@
 				@if(Session::has('warning'))
 					<div class="alert alert-warning">{{ Session::get('warning') }}</div>
 				@endif
+				@if(Session::has('info'))
+					<div class="alert alert-info">{{ Session::get('info') }}</div>
+				@endif
 				<form action="{{ url('/login') }}" method="post">
 					<div class="form-group">
 						<label for="login-email">E-postadress</label>

@@ -21,9 +21,16 @@
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li><p class="navbar-text">
-					Inloggad som <a href="{{ url('/profile') }}" class="navbar-link">{{{ Auth::user()->name }}}</a>
-				</p></li>
+				<li><p class="navbar-text">Inloggad som </p></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						{{{ Auth::user()->name }}} <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url('/profile') }}">Profil</a></li>
+						<li><a href="{{ url('/logout') }}">Logga ut</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>

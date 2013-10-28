@@ -9,7 +9,8 @@ class SecurityController extends BaseController {
 	
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on' => 'post'));
-		$this->beforeFilter('guest');
+		$this->beforeFilter('guest', array('except' => 'logout'));
+		$this->beforeFilter('auth', array('only' => 'logout'));
 	}
 	
 	public function signUp() {
@@ -59,5 +60,11 @@ class SecurityController extends BaseController {
         return Redirect::to('/login')
             ->with('danger', '<strong>Felaktig inloggning!</strong><br>Ditt användarnamn och/eller lösenord var felaktigt. Var vänlig försök igen.')
             ->withInput();
+	}
+	
+	public function logout() {
+		Auth::logout();
+		return Redirect::to('/login')
+				->with('info', 'Du är nu utloggad!');
 	}
 }
