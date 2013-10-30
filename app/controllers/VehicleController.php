@@ -21,7 +21,7 @@ class VehicleController extends BaseController {
 		$rules = array(
 			'name' => 'required|max:255',
 			'license-plate' => 'max:255',
-			'model-year' => 'date',
+			'model-year' => 'integer|min:1900|max:'.date('Y'),
 			'curb-weight' => 'integer|min:0',
 			'gross-weight' => 'integer|min:0',
 			'length' => 'integer|min:0',
@@ -32,7 +32,9 @@ class VehicleController extends BaseController {
 			'max' => 'Fältet får inte innehålla fler än :max tecken.',
 			'date' => 'Ogiltigt datum.',
 			'integer' => 'Värdet måste vara ett heltal.',
-			'min' => 'Värdet får inte vara negativt.'
+			'min' => 'Värdet får inte vara negativt.',
+			'model-year.min' => 'Äldsta tillåtna årtal är :min',
+			'model-year.max' => 'Framtida årtal är inte tillåtna'
 		);
 		$validator = Validator::make(Input::all(), $rules, $messages);
 		if ($validator->fails()) {
