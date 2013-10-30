@@ -39,7 +39,7 @@
 					<label for="createvehicle-modelyear">Årsmodell</label>
 					<select name="model-year" id="createvehicle-modelyear" class="form-control" tabindex="4" >
 						<option value="" @if (empty(Input::old('model-year'))) selected @endif>Okänt</option>
-						@for ($year = (int)date('Y'); $year >= 1900; $year--)
+						@for ($year = 1 + (int)date('Y'); $year >= 1900; $year--)
 						<option @if (Input::old('model-year') == $year) selected @endif>{{ $year }}</option>
 						@endfor
 					</select>
@@ -77,10 +77,10 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="form-group @if ($errors->has('legnth')) has-error @endif">
+				<div class="form-group @if ($errors->has('length')) has-error @endif">
 					<label for="createvehicle-length">Längd</label>
 					<div class="input-group">
-						<input type="number" name="legnth" id="createvehicle-length" class="form-control"
+						<input type="number" name="length" id="createvehicle-length" class="form-control"
 							   value="{{{ Input::old('length') }}}" tabindex="7" />
 						<span class="input-group-addon">cm</span>
 					</div>

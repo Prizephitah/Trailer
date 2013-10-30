@@ -41,5 +41,26 @@ class VehicleController extends BaseController {
 			return Redirect::action('VehicleController@create', array($groupId))
 					->withErrors($validator)->withInput(Input::all());
 		}
+		
+		$vehicle = new Vehicle();
+		$vehicle->name = Input::get('name');
+		$vehicle->description = Input::get('description');
+		$vehicle->license_plate = Input::get('license-plate');
+		$modelYear = new \DateTime();
+		$modelYear->setDate(Input::get('model-year'), 1, 1);
+		$vehicle->model_year = $modelYear;
+		$vehicle->curb_weight = (int)Input::get('curb-weight');
+		$vehicle->gross_weight = (int)Input::get('gross-weight');
+		$vehicle->length = (int)Input::get('length');
+		$vehicle->width = (int)Input::get('width');
+		$vehicle->created_by = Auth::user()->id;
+		$vehicle->created = new \DateTime();
+		
+		$group = Group::find($groupId);
+		$group->vehicles()->save($vehicle);
+		$group->push();
+		
+		return Redirect::action('GroupController@edit', array($groupId))
+				->with('success', 'Fordonet "'.e($vehicle->name).'" tillagt');
 	}
 }

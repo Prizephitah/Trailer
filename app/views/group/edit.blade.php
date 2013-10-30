@@ -6,6 +6,9 @@
 	@if(Session::has('danger'))
 		<div class="alert alert-danger">{{ Session::get('danger') }}</div>
 	@endif
+	@if(Session::has('success'))
+		<div class="alert alert-success">{{ Session::get('success') }}</div>
+	@endif
 	<div class="page-header">
 		<h1>Administrera grupp <small>{{{ $group->name }}}</small></h1>
 	</div>

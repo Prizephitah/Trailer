@@ -23,7 +23,7 @@ class CreateVehiclesTable extends Migration {
 			$t->integer('curb_weight');
 			$t->integer('gross_weight');
 			$t->integer('length');
-			$t->integer('height');
+			$t->integer('width');
 			$t->integer('created_by')->unsigned();
 			$t->dateTime('created');
 			$t->integer('updated_by')->nullable()->unsigned();
