@@ -55,21 +55,28 @@
 		</div>
 		<div class="form-group clearfix">
 			<label>Fordon</label>
-			<table class="table table-hover">
-				<tr>
-					<th>Namn</th>
-					<th>Registreringsnummer</th>
-					<th colspan="2"></th>
-				</tr>
-				@foreach ($group->vehicles as $vehicle)
-				<tr data-id="{{ $vehicle->id }}">
-					<td>{{{ $vehicle->name }}}</td>
-					<td>{{{ $vehicle->license_plate }}}</td>
-					<td><button class="btn btn-primary">Administrera</td>
-					<td><button class="btn btn-danger">Ta bort</button></td>
-				</tr>
-				@endforeach
-			</table>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<tr>
+						<th>Namn</th>
+						<th>Registreringsnummer</th>
+						<th>Årsmodell</th>
+						<th>Tjänstevikt/Totalvikt (kg)</th>
+						<th>Längd/Bredd (cm)</th>
+						<th></th>
+					</tr>
+					@foreach ($group->vehicles as $vehicle)
+					<tr data-id="{{ $vehicle->id }}">
+						<td>{{{ $vehicle->name }}}</td>
+						<td>{{{ $vehicle->license_plate }}}</td>
+						<td>{{{ date('Y', strtotime($vehicle->model_year)) }}}</td>
+						<td>{{{ $vehicle->curb_weight }}}/{{{ $vehicle->gross_weight }}}</td>
+						<td>{{{ $vehicle->length }}}/{{{ $vehicle->width }}}</td>
+						<td><button class="btn btn-primary pull-right">Administrera</td>
+					</tr>
+					@endforeach
+				</table>
+			</div>
 			<button class="btn btn-success pull-right add-vehicle-group" 
 					data-href="{{ action('VehicleController@create', array($group->id)) }}">
 				Lägg till nytt fordon

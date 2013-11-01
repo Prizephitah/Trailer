@@ -87,6 +87,41 @@
 				<dd>{{ count($group->users) }}st.</dd>
 			</dl>
 		</div>
+		<div class="col-md-6">
+			<dl>
+				<dt>Fordon</dt>
+				<dd>{{ count($group->vehicles) }}st.</dd>
+			</dl>
+		</div>
+	@endif
+	</div>
+	<div class="row">
+	@if ($isMember)
+		<div class="col-md-12">
+			<h2>Fordon</h2>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<tr>
+						<th>Namn</th>
+						<th>Registreringsnummer</th>
+						<th>Årsmodell</th>
+						<th>Tjänstevikt/Totalvikt (kg)</th>
+						<th>Längd/Bredd (cm)</th>
+						<!--<th></th>-->
+					</tr>
+					@foreach ($group->vehicles as $vehicle)
+					<tr data-id="{{ $vehicle->id }}">
+						<td>{{{ $vehicle->name }}}</td>
+						<td>{{{ $vehicle->license_plate }}}</td>
+						<td>{{{ date('Y', strtotime($vehicle->model_year)) }}}</td>
+						<td>{{{ $vehicle->curb_weight }}}/{{{ $vehicle->gross_weight }}}</td>
+						<td>{{{ $vehicle->length }}}/{{{ $vehicle->width }}}</td>
+						<!--<td><button class="btn btn-primary pull-right">Boka</td>-->
+					</tr>
+					@endforeach
+				</table>
+			</div>
+		</div>
 	@endif
 	</div>
 	<p>
