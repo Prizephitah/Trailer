@@ -15,22 +15,28 @@
 			</a></h3>
 			<p>{{{ $group->description }}}</p>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<dl>
 						<dt>Skapad</dt>
 						<dd>{{ date('Y-m-d', strtotime($group->created)) }}</dd>
 					</dl>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<dl>
 						<dt>Skapad av</dt>
 						<dd>{{ $group->createdBy()->alias }}</dd>
 					</dl>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<dl>
 						<dt>Medlemmar</dt>
 						<dd>{{ count($group->users) }}st.</dd>
+					</dl>
+				</div>
+				<div class="col-md-3">
+					<dl>
+						<dt>Fordon</dt>
+						<dd>{{ count($group->vehicles) }}st.</dd>
 					</dl>
 				</div>
 			</div>
