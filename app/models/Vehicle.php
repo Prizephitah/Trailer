@@ -22,6 +22,6 @@ class Vehicle extends Eloquent {
 	}
 	
 	public function group() {
-		$this->belongsTo('Group', 'group_id');
+		return $this->belongsTo('Group', 'group_id');
 	}
 }

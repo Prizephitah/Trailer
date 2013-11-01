@@ -63,4 +63,18 @@ class VehicleController extends BaseController {
 		return Redirect::action('GroupController@edit', array($groupId))
 				->with('success', 'Fordonet "'.e($vehicle->name).'" tillagt');
 	}
+	
+	public function show($vehicleId) {
+		$vehicle = Vehicle::find($vehicleId);
+		if ($vehicle == null) {
+			return App::abort(404, 'Fordonet finns inte');
+		}
+		$isMember = $vehicle->group->users->contains(Auth::user()->id);
+		$isAdmin = false;
+		if ($isMember) {
+			$isAdmin = (bool)$vehicle->group->users->find(Auth::user()->id)->pivot->admin;
+		}
+		return View::make('vehicle/show')->with('vehicle', $vehicle)->with('title', 'Visa fordon: '.e($vehicle->name))
+				->with('isMember', $isMember)->with('isAdmin', $isAdmin);
+	}
 }
