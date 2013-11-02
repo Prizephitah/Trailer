@@ -113,7 +113,7 @@
 					<tr data-id="{{ $vehicle->id }}">
 						<td>{{{ $vehicle->name }}}</td>
 						<td>{{{ $vehicle->license_plate }}}</td>
-						<td>{{{ date('Y', strtotime($vehicle->model_year)) }}}</td>
+						<td>{{{ $vehicle->model_year ? date('Y', strtotime($vehicle->model_year)) : 'Okänt' }}}</td>
 						<td>{{{ $vehicle->curb_weight }}}/{{{ $vehicle->gross_weight }}}</td>
 						<td>{{{ $vehicle->length }}}/{{{ $vehicle->width }}}</td>
 						<!--<td><button class="btn btn-primary pull-right">Boka</td>-->

@@ -73,7 +73,7 @@
 		<div class="col-md-4">
 			<dl>
 				<dt>Årsmodell</dt>
-				<dl>{{{ date('Y', strtotime($vehicle->model_year)) }}}</dl>
+				<dl>{{{ $vehicle->model_year ? date('Y', strtotime($vehicle->model_year)) : 'Okänt' }}}</dl>
 			</dl>
 		</div>
 		<div class="col-md-4">

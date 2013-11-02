@@ -46,9 +46,11 @@ class VehicleController extends BaseController {
 		$vehicle->name = Input::get('name');
 		$vehicle->description = Input::get('description');
 		$vehicle->license_plate = Input::get('license-plate');
-		$modelYear = new \DateTime();
-		$modelYear->setDate(Input::get('model-year'), 1, 1);
-		$vehicle->model_year = $modelYear;
+		if (Input::has('model-year')) {
+			$modelYear = new \DateTime();
+			$modelYear->setDate(Input::get('model-year'), 1, 1);
+			$vehicle->model_year = $modelYear;
+		}
 		$vehicle->curb_weight = (int)Input::get('curb-weight');
 		$vehicle->gross_weight = (int)Input::get('gross-weight');
 		$vehicle->length = (int)Input::get('length');
@@ -60,7 +62,7 @@ class VehicleController extends BaseController {
 		$group->vehicles()->save($vehicle);
 		$group->push();
 		
-		return Redirect::action('GroupController@edit', array($groupId))
+		return Redirect::action('VehicleController@show', array($vehicle->id))
 				->with('success', 'Fordonet "'.e($vehicle->name).'" tillagt');
 	}
 	
@@ -114,9 +116,13 @@ class VehicleController extends BaseController {
 		$vehicle->name = Input::get('name');
 		$vehicle->description = Input::get('description');
 		$vehicle->license_plate = Input::get('license-plate');
+		if (Input::has('model-year')) {
 		$modelYear = new \DateTime();
 		$modelYear->setDate(Input::get('model-year'), 1, 1);
 		$vehicle->model_year = $modelYear;
+		} else {
+			$vehicle->model_year = null;
+		}
 		$vehicle->curb_weight = (int)Input::get('curb-weight');
 		$vehicle->gross_weight = (int)Input::get('gross-weight');
 		$vehicle->length = (int)Input::get('length');

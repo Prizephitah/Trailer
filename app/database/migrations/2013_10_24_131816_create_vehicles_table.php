@@ -19,7 +19,7 @@ class CreateVehiclesTable extends Migration {
 			$t->string('license_plate', 255);
 			$t->string('name', 255);
 			$t->text('description');
-			$t->date('model_year');
+			$t->date('model_year')->nullable();
 			$t->integer('curb_weight');
 			$t->integer('gross_weight');
 			$t->integer('length');
