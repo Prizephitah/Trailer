@@ -10,7 +10,7 @@ class VehicleController extends BaseController {
 	public function __construct() {
 		$this->beforeFilter('csrf', array('on' => array('post', 'delete', 'put')));
 		$this->beforeFilter('auth');
-		$this->beforeFilter('groupadmin', array('except' => 'show'));
+		$this->beforeFilter('groupadmin', array('except' => array('show')));
 	}
 	
 	public function create($groupId) {
@@ -76,5 +76,19 @@ class VehicleController extends BaseController {
 		}
 		return View::make('vehicle/show')->with('vehicle', $vehicle)->with('title', 'Visa fordon: '.e($vehicle->name))
 				->with('isMember', $isMember)->with('isAdmin', $isAdmin);
+	}
+	
+	public function edit($vehicleId) {
+		$vehicle = Vehicle::find($vehicleId);
+		return View::make('vehicle/edit')->with('vehicle', $vehicle)
+				->with('title', 'Administrera fordon: '.e($vehicle->name));
+	}
+	
+	public function update($vehicleId) {
+		
+	}
+	
+	public function destroy() {
+		
 	}
 }

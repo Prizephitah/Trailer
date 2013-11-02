@@ -89,6 +89,14 @@ Route::filter('csrf', function()
 
 Route::filter('groupadmin', function($route) {
 	$id = $route->getParameter('group');
+	if ($id === null) {
+		$vehicleId = $route->getParameter('vehicle');
+		$vehicle = Vehicle::find($vehicleId);
+		if ($vehicle == null) {
+			return App::abort(404, 'Resursen saknas');
+		}
+		$id = $vehicle->group->id;
+	}
 	$group = Group::with('users')->where('id', '=', $id)->first();
 	if ($group == null) {
 		return App::abort(404, 'Gruppen finns inte');

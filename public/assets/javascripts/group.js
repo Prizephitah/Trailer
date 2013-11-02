@@ -23,6 +23,12 @@ function Group() {
 			window.location = $(this).data('href');
 		}
 	});
+	$('.edit-vehicle').click(function(event) {
+		event.preventDefault();
+		if ($(this).data('href')) {
+			window.location = $(this).data('href');
+		}
+	});
 	$('.delete-group').click(function(event) {
 		event.preventDefault();
 		$('body').append(

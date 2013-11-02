@@ -72,7 +72,10 @@
 						<td>{{{ date('Y', strtotime($vehicle->model_year)) }}}</td>
 						<td>{{{ $vehicle->curb_weight }}}/{{{ $vehicle->gross_weight }}}</td>
 						<td>{{{ $vehicle->length }}}/{{{ $vehicle->width }}}</td>
-						<td><button class="btn btn-primary pull-right">Administrera</td>
+						<td><button class="btn btn-primary pull-right edit-vehicle" 
+									data-href="{{ action('VehicleController@edit', array($vehicle->id)) }}">
+								<span class="glyphicon glyphicon-cog"></span> Administrera</button>
+						</td>
 					</tr>
 					@endforeach
 				</table>

@@ -43,3 +43,6 @@ Route::post('/group/{id}/leave', 'GroupController@leave');
 Route::get('/group/{group}/add-vehicle', 'VehicleController@create');
 Route::post('/group/{group}/add-vehicle', 'VehicleController@store');
 Route::get('/vehicle/{vehicle}', 'VehicleController@show');
+Route::get('/vehicle/{vehicle}/edit', 'VehicleController@edit');
+Route::put('/vehicle/{vehicle}', 'VehicleController@update');
+Route::delete('/vehicle/{vehicle}', 'VehicleController@destroy');
