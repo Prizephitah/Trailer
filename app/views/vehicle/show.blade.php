@@ -106,7 +106,8 @@
 	@if ($isMember)
 	<p>
 		@if ($isAdmin)
-		<button class="btn btn-primary admin-vehicle">
+		<button class="btn btn-primary admin-vehicle" 
+				data-href="{{ action('VehicleController@edit', array($vehicle->id)) }}">
 			<span class="glyphicon glyphicon-cog"></span> Administrera
 		</button>
 		@endif
