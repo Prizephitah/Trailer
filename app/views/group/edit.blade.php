@@ -82,7 +82,7 @@
 			</div>
 			<button class="btn btn-success pull-right add-vehicle-group" 
 					data-href="{{ action('VehicleController@create', array($group->id)) }}">
-				Lägg till nytt fordon
+				<span class="glyphicon glyphicon-plus"></span> Lägg till nytt fordon
 			</button>
 		</div>
 		
@@ -91,7 +91,7 @@
 			<button type="submit" class="btn btn-primary" tabindex="3">Uppdatera</button>
 			<button class="btn btn-danger delete-group" tabindex="4" 
 					data-href="{{ action('GroupController@destroy', array($group->id)) }}">
-				Ta bort
+				<span class="glyphicon glyphicon-trash"></span> Ta bort
 			</button>
 		</p>
 	</form>

@@ -121,7 +121,7 @@
 			<button type="submit" class="btn btn-primary">Uppdatera</button>
 			<button class="btn btn-danger delete-vehicle"
 					data-href="{{ action('VehicleController@destroy', array($vehicle->id)) }}">
-				Ta bort
+				<span class="glyphicon glyphicon-trash"></span> Ta bort
 			</button>
 		</p>
 	</form>
