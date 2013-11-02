@@ -129,7 +129,10 @@ class VehicleController extends BaseController {
 		return Redirect::action('VehicleController@show', array($vehicle->id))->with('success', 'Ändringar sparade!');
 	}
 	
-	public function destroy() {
-		
+	public function destroy($vehicleId) {
+		$vehicle = Vehicle::find($vehicleId);
+		$vehicle->delete();
+		return Redirect::action('GroupController@show', array($vehicle->group->id))
+				->with('success', 'Fordonet "'.e($vehicle->name).'" togs bort.');
 	}
 }

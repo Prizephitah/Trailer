@@ -119,7 +119,7 @@
 		<p>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}" id="csrf-token" />
 			<button type="submit" class="btn btn-primary">Uppdatera</button>
-			<button class="btn btn-danger delete-group"
+			<button class="btn btn-danger delete-vehicle"
 					data-href="{{ action('VehicleController@destroy', array($vehicle->id)) }}">
 				Ta bort
 			</button>
