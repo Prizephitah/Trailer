@@ -85,7 +85,48 @@ class VehicleController extends BaseController {
 	}
 	
 	public function update($vehicleId) {
+		$vehicle = Vehicle::find($vehicleId);
 		
+		$rules = array(
+			'name' => 'required|max:255',
+			'license-plate' => 'max:255',
+			'model-year' => 'integer|min:1900|max:'.date('Y'),
+			'curb-weight' => 'integer|min:0',
+			'gross-weight' => 'integer|min:0',
+			'length' => 'integer|min:0',
+			'width' => 'integer|min:0'
+		);
+		$messages = array(
+			'required' => 'Fältet är obligatoriskt.',
+			'max' => 'Fältet får inte innehålla fler än :max tecken.',
+			'date' => 'Ogiltigt datum.',
+			'integer' => 'Värdet måste vara ett heltal.',
+			'min' => 'Värdet får inte vara negativt.',
+			'model-year.min' => 'Äldsta tillåtna årtal är :min',
+			'model-year.max' => 'Framtida årtal är inte tillåtna'
+		);
+		$validator = Validator::make(Input::all(), $rules, $messages);
+		if ($validator->fails()) {
+			return Redirect::action('VehicleController@edit', array($vehicle->id))
+					->withErrors($validator)->withInput(Input::all());
+		}
+		
+		$vehicle->name = Input::get('name');
+		$vehicle->description = Input::get('description');
+		$vehicle->license_plate = Input::get('license-plate');
+		$modelYear = new \DateTime();
+		$modelYear->setDate(Input::get('model-year'), 1, 1);
+		$vehicle->model_year = $modelYear;
+		$vehicle->curb_weight = (int)Input::get('curb-weight');
+		$vehicle->gross_weight = (int)Input::get('gross-weight');
+		$vehicle->length = (int)Input::get('length');
+		$vehicle->width = (int)Input::get('width');
+		$vehicle->updated = new DateTime();
+		$vehicle->updated_by = Auth::user()->id;
+		
+		$vehicle->save();
+		
+		return Redirect::action('VehicleController@show', array($vehicle->id))->with('success', 'Ändringar sparade!');
 	}
 	
 	public function destroy() {
