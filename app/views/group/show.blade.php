@@ -111,7 +111,9 @@
 					</tr>
 					@foreach ($group->vehicles as $vehicle)
 					<tr data-id="{{ $vehicle->id }}">
-						<td>{{{ $vehicle->name }}}</td>
+						<td><a href="{{ action('VehicleController@show', array($vehicle->id)) }}">
+							{{{ $vehicle->name }}}
+						</a></td>
 						<td>{{{ $vehicle->license_plate }}}</td>
 						<td>{{{ $vehicle->model_year ? date('Y', strtotime($vehicle->model_year)) : 'Okänt' }}}</td>
 						<td>{{{ $vehicle->curb_weight }}}/{{{ $vehicle->gross_weight }}}</td>
