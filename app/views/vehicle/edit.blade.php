@@ -47,7 +47,7 @@
 					<label for="editvehicle-modelyear">Årsmodell</label>
 					<select name="model-year" id="editvehicle-modelyear" class="form-control" tabindex="4" >
 						<option value="" 
-								@if (empty(Input::old('model-year', $vehicle->model_year))) selected @endif
+								@if (!Input::old('model-year', $vehicle->model_year)) selected @endif
 								>Okänt</option>
 						@for ($year = 1 + (int)date('Y'); $year >= 1900; $year--)
 						<option 

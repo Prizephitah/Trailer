@@ -38,7 +38,7 @@
 				<div class="form-group @if ($errors->has('model-year')) has-error @endif">
 					<label for="createvehicle-modelyear">Årsmodell</label>
 					<select name="model-year" id="createvehicle-modelyear" class="form-control" tabindex="4" >
-						<option value="" @if (empty(Input::old('model-year'))) selected @endif>Okänt</option>
+						<option value="" @if (!Input::old('model-year')) selected @endif>Okänt</option>
 						@for ($year = 1 + (int)date('Y'); $year >= 1900; $year--)
 						<option @if (Input::old('model-year') == $year) selected @endif>{{ $year }}</option>
 						@endfor
