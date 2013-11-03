@@ -42,6 +42,19 @@
 						<li>{{{ $user->alias }}}</li>
 						@endforeach
 					</ul>
+					<h4>Fordon</h4>
+					<ul>
+						@foreach ($group->vehicles as $vehicle)
+						<li>
+							<a href="{{ action('VehicleController@show', array($vehicle->id)) }}">
+								{{{ $vehicle->name }}}
+							</a> 
+							@if ($vehicle->license_plate)
+							<small>({{{ $vehicle->license_plate }}})</small>
+							@endif
+						</li>
+						@endforeach
+					</ul>
 				</li>
 				@endforeach
 			</ul>
