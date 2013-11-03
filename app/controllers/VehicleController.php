@@ -21,7 +21,7 @@ class VehicleController extends BaseController {
 		$rules = array(
 			'name' => 'required|max:255',
 			'license-plate' => 'max:255',
-			'model-year' => 'integer|min:1900|max:'.date('Y'),
+			'model-year' => 'integer|min:1900|max:'.(1 + date('Y')),
 			'curb-weight' => 'integer|min:0',
 			'gross-weight' => 'integer|min:0',
 			'length' => 'integer|min:0',
@@ -92,7 +92,7 @@ class VehicleController extends BaseController {
 		$rules = array(
 			'name' => 'required|max:255',
 			'license-plate' => 'max:255',
-			'model-year' => 'integer|min:1900|max:'.date('Y'),
+			'model-year' => 'integer|min:1900|max:'.(1 + date('Y')),
 			'curb-weight' => 'integer|min:0',
 			'gross-weight' => 'integer|min:0',
 			'length' => 'integer|min:0',
