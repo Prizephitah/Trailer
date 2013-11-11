@@ -107,3 +107,24 @@ Route::filter('groupadmin', function($route) {
 				->with('danger', 'Du saknar behörighet för att administrera gruppen!');
 	}
 });
+
+Route::filter('groupmember', function($route) {
+	$id = $route->getParameter('group');
+	if ($id === null) {
+		$vehicleId = $route->getParameter('vehicle');
+		$vehicle = Vehicle::find($vehicleId);
+		if ($vehicle == null) {
+			return App::abort(404, 'Resursen saknas');
+		}
+		$id = $vehicle->group->id;
+	}
+	$group = Group::with('users')->where('id', '=', $id)->first();
+	if ($group == null) {
+		return App::abort(404, 'Gruppen finns inte');
+	}
+	$isMember = $group->users->contains(Auth::user()->id);
+	if (!$isMember) {
+		return Redirect::action('GroupController@show', array($group->id))
+				->with('danger', 'Du är inte medlem i gruppen!');
+	}
+});

@@ -46,3 +46,5 @@ Route::get('/vehicle/{vehicle}', 'VehicleController@show');
 Route::get('/vehicle/{vehicle}/edit', 'VehicleController@edit');
 Route::put('/vehicle/{vehicle}', 'VehicleController@update');
 Route::delete('/vehicle/{vehicle}', 'VehicleController@destroy');
+
+Route::get('/vehicle/{vehicle}/book', 'BookingController@create');

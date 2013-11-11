@@ -35,6 +35,7 @@ return array(
 			$collection->javascript('../vendor/twitter/bootstrap/js/dropdown.js');
 			$collection->javascript('../vendor/twitter/bootstrap/js/transition.js');
 			$collection->javascript('../vendor/twitter/bootstrap/js/collapse.js');
+			$collection->javascript('../vendor/twitter/bootstrap/js/tooltip.js');
 	
             // Switch to the stylesheets directory and require the "less" and "sass" directories.
             // These directories both have a filter applied to them so that the built
