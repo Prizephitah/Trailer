@@ -5,7 +5,11 @@ function Booking() {
 		} else {
 			$('input[type=time]').removeAttr('disabled');
 		}
-	})
+	});
+	
+	$('.start-date').datepicker('setStartDate', new Date()).on('changeDate', function(event) {
+		$('.end-date').datepicker('setStartDate', event.date);
+	});
 };
 
 var Trailer = Trailer || {};

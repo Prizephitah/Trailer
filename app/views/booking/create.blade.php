@@ -22,8 +22,8 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="input-group">
-								<input type="date" class="form-control" id="createbooking-from" name="start[date]"
-									   placeholder="Datum"/>
+								<input type="date" class="form-control start-date" id="createbooking-from" 
+									   name="start[date]" placeholder="Datum"/>
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar" rel="tooltip" title="Startdatum"></span>
 								</span>
@@ -46,7 +46,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="input-group">
-								<input type="date" class="form-control" id="createbooking-to" name="end[date]" 
+								<input type="date" class="form-control end-date" id="createbooking-to" name="end[date]" 
 									   placeholder="Datum"/>
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar" rel="tooltip" title="Slutdatum"></span>
