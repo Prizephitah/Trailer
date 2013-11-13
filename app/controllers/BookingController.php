@@ -20,4 +20,41 @@ class BookingController extends BaseController {
 		}
 		return View::make('booking/create')->with('vehicle', $vehicle)->with('title', 'Boka '.$vehicle->name);
 	}
+	
+	public function store($vehicleId) {
+		$vehicle = Vehicle::find($vehicleId);
+		if ($vehicle == null) {
+			return App::abort(404, 'Fordonet finns inte');
+		}
+		
+		$rules = array(
+			'start.date' => 'required|date_format:Y-m-d',
+			'end.date' => 'required|date_format:Y-m-d|end_date:start.date',
+			'start.time' => array('required', 'regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/'),
+			'end.time' => array('required', 'regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/')
+		);
+		$messages = array(
+			'required' => 'Fältet är obligatoriskt.',
+			'date_format' => 'Datumet måste vara på formatet ÅÅÅÅ-MM-DD.',
+			'end_date' => 'Slutdatumet får inte vara före startdatumet.',
+			'regex' => 'Klockslaget måste vara på formatet HH:MM.'
+		);
+		$validator = Validator::make(Input::all(), $rules, $messages);
+		if ($validator->fails()) {
+			return Redirect::action('BookingController@create', array($vehicleId))
+					->withErrors($validator)->withInput(Input::all());
+		}
+		if (Input::has('wholeday')) {
+			$startDate = new DateTime(Input::get('start.date').' 00:00:00');
+			$endDate = new DateTime(Input::get('end.date').' 23:59:59');
+		} else {
+			$startDate = new DateTime(Input::get('start.date').' '.Input::get('start.time'));
+			$endDate = new DateTime(Input::get('end.date').' '.Input::get('end.time'));
+		}
+		if ($startDate > $endDate) {
+			return Redirect::action('BookingController@create', array($vehicleId))
+					->withErrors(array('end.time' => 'Sluttiden får inte vara före starttiden.'))
+					->withInput(Input::all());
+		}
+	}
 }

@@ -48,3 +48,4 @@ Route::put('/vehicle/{vehicle}', 'VehicleController@update');
 Route::delete('/vehicle/{vehicle}', 'VehicleController@destroy');
 
 Route::get('/vehicle/{vehicle}/book', 'BookingController@create');
+Route::post('/vehicle/{vehicle}/book', 'BookingController@store');

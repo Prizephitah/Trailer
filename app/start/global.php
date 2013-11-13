@@ -81,3 +81,16 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Require The custom validation file and register the class
+|--------------------------------------------------------------------------
+ */
+
+require app_path().'/validation.php';
+
+Validator::resolver(function($translator, $data, $rules, $messages)
+{
+	return new CustomValidator($translator, $data, $rules, $messages);
+});
