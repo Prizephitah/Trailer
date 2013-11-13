@@ -56,5 +56,26 @@ class BookingController extends BaseController {
 					->withErrors(array('end.time' => 'Sluttiden får inte vara före starttiden.'))
 					->withInput(Input::all());
 		}
+		
+		$booking = new Booking();
+		$booking->user_id = Auth::user()->id;
+		$booking->vehicle_id = $vehicleId;
+		$booking->start = $startDate;
+		$booking->end = $endDate;
+		if (Input::has('comment')) {
+			$booking->comment = Input::get('comment');
+		}
+		$booking->save();
+		
+		return Redirect::action('BookingController@show', array($booking->id))->with('success', 'Fordon bokat!');
+	}
+	
+	public function show($bookingId) {
+		$booking = Booking::find($bookingId);
+		if ($booking == null) {
+			return App::abort(404, 'Bokningen finns inte');
+		}
+		return View::make('booking/show')->with('booking', $booking)
+				->with('title', 'Bokning av '.$booking->vehicle()->name);
 	}
 }

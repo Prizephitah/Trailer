@@ -113,10 +113,16 @@ Route::filter('groupmember', function($route) {
 	if ($id === null) {
 		$vehicleId = $route->getParameter('vehicle');
 		$vehicle = Vehicle::find($vehicleId);
-		if ($vehicle == null) {
-			return App::abort(404, 'Resursen saknas');
+		if ($vehicle !== null) {
+			$id = $vehicle->group->id;
 		}
-		$id = $vehicle->group->id;
+	}
+	if ($id === null) {
+		$bookingId = $route->getParameter('booking');
+		$booking = Booking::find($bookingId);
+		if ($booking !== null) {
+			$id = $booking->vehicle()->group->id;
+		}
 	}
 	$group = Group::with('users')->where('id', '=', $id)->first();
 	if ($group == null) {
