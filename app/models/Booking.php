@@ -13,19 +13,15 @@ class Booking extends Eloquent {
 	
 	public $timestamps = false;
 	
-	public function createdBy() {
-		return User::find($this->created_by);
-	}
-	
 	public function updatedBy() {
-		return User::find($this->updated_by);
+		return $this->belongsTo('User', 'updated_by_id');
 	}
 	
 	public function user() {
-		return User::find($this->user_id);
+		return $this->belongsTo('User', 'user_id');
 	}
 	
 	public function vehicle() {
-		return Vehicle::find($this->vehicle_id);
+		return $this->belongsTo('Vehicle', 'vehicle_id');
 	}
 }

@@ -32,6 +32,8 @@ class CreateVehiclesTable extends Migration {
 			$t->softDeletes();
 			$t->index('created_by');
 			$t->foreign('group_id')->references('id')->on('groups');
+			$t->foreign('created_by')->references('id')->on('users');
+			$t->foreign('updated_by')->references('id')->on('users');
 		});
 	}
 

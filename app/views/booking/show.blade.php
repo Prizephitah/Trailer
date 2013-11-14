@@ -14,7 +14,7 @@
 	@endif
 				
 	<div class="page-header">
-		<h1>Bokning av {{{ $booking->vehicle()->name }}} 
+		<h1>Bokning av {{{ $booking->vehicle->name }}} 
 			<small>
 				{{ date('Y-m-d H:i', strtotime($booking->start)) }} &mdash; 
 				{{ date('Y-m-d H:i', strtotime($booking->end)) }}

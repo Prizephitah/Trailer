@@ -58,8 +58,8 @@ class BookingController extends BaseController {
 		}
 		
 		$booking = new Booking();
-		$booking->user_id = Auth::user()->id;
-		$booking->vehicle_id = $vehicleId;
+		$booking->user()->associate(Auth::user());
+		$booking->vehicle()->associate($vehicle);
 		$booking->start = $startDate;
 		$booking->end = $endDate;
 		if (Input::has('comment')) {
@@ -76,6 +76,6 @@ class BookingController extends BaseController {
 			return App::abort(404, 'Bokningen finns inte');
 		}
 		return View::make('booking/show')->with('booking', $booking)
-				->with('title', 'Bokning av '.$booking->vehicle()->name);
+				->with('title', 'Bokning av '.$booking->vehicle->name);
 	}
 }

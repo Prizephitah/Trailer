@@ -24,7 +24,7 @@
 				<div class="col-md-3">
 					<dl>
 						<dt>Skapad av</dt>
-						<dd>{{ $group->createdBy()->alias }}</dd>
+						<dd>{{ $group->createdBy->alias }}</dd>
 					</dl>
 				</div>
 				<div class="col-md-3">

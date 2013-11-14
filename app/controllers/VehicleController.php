@@ -55,7 +55,7 @@ class VehicleController extends BaseController {
 		$vehicle->gross_weight = (int)Input::get('gross-weight');
 		$vehicle->length = (int)Input::get('length');
 		$vehicle->width = (int)Input::get('width');
-		$vehicle->created_by = Auth::user()->id;
+		$vehicle->createdBy()->associate(Auth::user());
 		$vehicle->created = new \DateTime();
 		
 		$group = Group::find($groupId);
@@ -128,7 +128,7 @@ class VehicleController extends BaseController {
 		$vehicle->length = (int)Input::get('length');
 		$vehicle->width = (int)Input::get('width');
 		$vehicle->updated = new DateTime();
-		$vehicle->updated_by = Auth::user()->id;
+		$vehicle->updatedBy()->associate(Auth::user());
 		
 		$vehicle->save();
 		

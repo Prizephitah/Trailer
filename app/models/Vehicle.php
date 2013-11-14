@@ -14,14 +14,18 @@ class Vehicle extends Eloquent {
 	public $timestamps = false;
 	
 	public function createdBy() {
-		return User::find($this->created_by);
+		return $this->belongsTo('User', 'created_by_id');
 	}
 	
 	public function updatedBy() {
-		return User::find($this->updated_by);
+		return $this->belongsTo('User', 'updated_by_id');
 	}
 	
 	public function group() {
 		return $this->belongsTo('Group', 'group_id');
+	}
+	
+	public function bookings() {
+		return $this->hasMany('Booking', 'vehicle_id');
 	}
 }

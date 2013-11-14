@@ -29,9 +29,9 @@
 				<dt>Skapad av</dt>
 				<dd>
 					@if ($isMember)
-						{{{ $group->createdBy()->name }}}
+						{{{ $group->createdBy->name }}}
 					@else
-						{{{ $group->createdBy()->alias }}}
+						{{{ $group->createdBy->alias }}}
 					@endif
 				</dd>
 			</dl>
@@ -50,9 +50,9 @@
 				<dt>Uppdaterad av</dt>
 				<dd>
 					@if ($isMember)
-						{{{ $group->updatedBy()->name }}}
+						{{{ $group->updatedBy->name }}}
 					@else
-						{{{ $group->updatedBy()->alias }}}
+						{{{ $group->updatedBy->alias }}}
 					@endif
 				</dd>
 			</dl>

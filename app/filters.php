@@ -121,7 +121,7 @@ Route::filter('groupmember', function($route) {
 		$bookingId = $route->getParameter('booking');
 		$booking = Booking::find($bookingId);
 		if ($booking !== null) {
-			$id = $booking->vehicle()->group->id;
+			$id = $booking->vehicle->group->id;
 		}
 	}
 	$group = Group::with('users')->where('id', '=', $id)->first();

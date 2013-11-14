@@ -35,7 +35,7 @@ class GroupController extends BaseController {
 		$group = new Group();
 		$group->name = Input::get('name');
 		$group->description = Input::get('description');
-		$group->created_by = Auth::user()->id;
+		$group->createdBy()->associate(Auth::user());
 		$group->created = new DateTime();
 		$group->save();
 		$group->users()->attach(Auth::user(), array('admin' => true));
@@ -88,7 +88,7 @@ class GroupController extends BaseController {
 		$group->name = Input::get('name');
 		$group->description = Input::get('description');
 		$group->updated = new DateTime();
-		$group->updated_by = Auth::user()->id;
+		$group->updatedBy()->associate(Auth::user());
 		$admins = 0;
 		foreach (Input::get('admins') as $userId => $options) {
 			$group->users->find($userId)->pivot->admin = isset($options['admin']);

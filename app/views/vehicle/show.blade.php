@@ -33,9 +33,9 @@
 				<dt>Skapad av</dt>
 				<dd>
 					@if ($isMember)
-						{{{ $vehicle->createdBy()->name }}}
+						{{{ $vehicle->createdBy->name }}}
 					@else
-						{{{ $vehicle->createdBy()->alias }}}
+						{{{ $vehicle->createdBy->alias }}}
 					@endif
 				</dd>
 			</dl>
@@ -54,9 +54,9 @@
 				<dt>Uppdaterad av</dt>
 				<dd>
 					@if ($isMember)
-						{{{ $vehicle->updatedBy()->name }}}
+						{{{ $vehicle->updatedBy->name }}}
 					@else
-						{{{ $vehicle->updatedBy()->alias }}}
+						{{{ $vehicle->updatedBy->alias }}}
 					@endif
 				</dd>
 			</dl>
