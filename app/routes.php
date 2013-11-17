@@ -30,9 +30,31 @@ Route::get('/logout', 'SecurityController@logout');
 Route::get('/', array('before' => 'auth', 'do' => function() {
 	$self = Auth::user();
 	$self->load('groups');
+	$bookings = DB::table('bookings')
+			->select('bookings.id', 'bookings.start', 'bookings.end', 'vehicles.name as vehicle_name', 
+					'users.name as user_name', 'bookings.comment')
+			->join('vehicles', 'bookings.vehicle_id', '=', 'vehicles.id')
+			->join('groups', 'vehicles.group_id', '=', 'groups.id')
+			->join('groups_users', 'groups.id', '=', 'groups_users.group_id')
+			->join('users', 'bookings.user_id', '=', 'users.id')
+			->where('groups_users.user_id', '=', Auth::user()->id)
+			->where('bookings.end', '>', new DateTime())
+			->orderBy('bookings.start', 'desc')
+			->get();
+	$upcommingBookings = array();
+	$ongoingBookings = array();
+	foreach ($bookings as $booking) {
+		if (new DateTime($booking->start) < new DateTime()) {
+			$ongoingBookings[] = $booking;
+		} else {
+			$upcommingBookings[] = $booking;
+		}
+	}
 	return View::make('dashboard', array(
 		'title' => 'Kontrollpanel',
-		'self' => $self
+		'self' => $self,
+		'upcommingBookings' => $upcommingBookings,
+		'ongoingBookings' => $ongoingBookings
 	));
 }));
 

@@ -60,9 +60,58 @@
 			</ul>
 		</div>
 		<div class="col-md-6">
+			@if (!empty($ongoingBookings))
+			<div class="page-header">
+				<h2>Pågående bokningar</h2>
+			</div>
+			<ul class="list-group">
+				@foreach ($ongoingBookings as $booking)
+				<li class="list-group-item">
+					<h3>
+						<a href="{{ action('BookingController@show', array($booking->id)) }}">
+						{{{ $booking->vehicle_name }}}
+						</a>
+						<small>
+							{{ date('Y-m-d H:i', strtotime($booking->start)) }} &mdash; 
+							{{ date('Y-m-d H:i', strtotime($booking->end)) }}
+						</small>
+					</h3>
+					<dl>
+						<dt>Bokad av</dt>
+						<dd>{{{ $booking->user_name }}}</dd>
+					</dl>
+					@if ($booking->comment)
+					<p>{{{ $booking->comment }}}</p>
+					@endif
+				</li>
+				@endforeach
+			</ul>
+			@endif
 			<div class="page-header">
 				<h2>Kommande bokningar</h2>
 			</div>
+			<ul class="list-group">
+				@foreach ($upcommingBookings as $booking)
+				<li class="list-group-item">
+					<h3>
+						<a href="{{ action('BookingController@show', array($booking->id)) }}">
+						{{{ $booking->vehicle_name }}}
+						</a>
+						<small>
+							{{ date('Y-m-d H:i', strtotime($booking->start)) }} &mdash; 
+							{{ date('Y-m-d H:i', strtotime($booking->end)) }}
+						</small>
+					</h3>
+					<dl>
+						<dt>Bokad av</dt>
+						<dd>{{{ $booking->user_name }}}</dd>
+					</dl>
+					@if ($booking->comment)
+					<p>{{{ $booking->comment }}}</p>
+					@endif
+				</li>
+				@endforeach
+			</ul>
 		</div>
 	</div>
 </div>
