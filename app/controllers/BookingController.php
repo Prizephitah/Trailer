@@ -75,7 +75,10 @@ class BookingController extends BaseController {
 		if ($booking == null) {
 			return App::abort(404, 'Bokningen finns inte');
 		}
-		return View::make('booking/show')->with('booking', $booking)
+		$isAdmin = $booking->user->id == Auth::user()->id || 
+				($booking->vehicle->group->users->contains(Auth::user()->id) && 
+				$booking->vehicle->group->users->find(Auth::user()->id)->pivot->admin);
+		return View::make('booking/show')->with('booking', $booking)->with('isAdmin', $isAdmin)
 				->with('title', 'Bokning av '.$booking->vehicle->name);
 	}
 }
