@@ -83,6 +83,14 @@
 			</dl>
 		</div>
 	</div>
+	@if (!empty($booking->comment))
+	<div class="row">
+		<div class="col-md-12">
+			<h5><strong>Notering</strong></h5>
+			<p>{{ nl2br(e($booking->comment)) }}</p>
+		</div>
+	</div>
+	@endif
 	@if ($isAdmin)
 	<p>
 		<button class="btn btn-primary"><span class="glyphicon glyphicon-cog"></span> Administrera</button>
