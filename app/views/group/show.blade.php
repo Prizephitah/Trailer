@@ -107,7 +107,7 @@
 						<th>Årsmodell</th>
 						<th>Tjänstevikt/Totalvikt (kg)</th>
 						<th>Längd/Bredd (cm)</th>
-						<!--<th></th>-->
+						<th></th>
 					</tr>
 					@foreach ($group->vehicles as $vehicle)
 					<tr data-id="{{ $vehicle->id }}">
@@ -118,7 +118,12 @@
 						<td>{{{ $vehicle->model_year ? date('Y', strtotime($vehicle->model_year)) : 'Okänt' }}}</td>
 						<td>{{{ $vehicle->curb_weight }}}/{{{ $vehicle->gross_weight }}}</td>
 						<td>{{{ $vehicle->length }}}/{{{ $vehicle->width }}}</td>
-						<!--<td><button class="btn btn-primary pull-right">Boka</td>-->
+						<td>
+							<button class="btn btn-primary pull-right book-vehicle" 
+									data-href="{{ action('BookingController@create', array($vehicle->id)) }}">
+								Boka
+							</button>
+						</td>
 					</tr>
 					@endforeach
 				</table>

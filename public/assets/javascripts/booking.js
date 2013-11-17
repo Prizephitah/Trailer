@@ -12,6 +12,13 @@ function Booking() {
 			$('.end-date').datepicker('setStartDate', event.date);
 		});
 	}
+	
+	$('.book-vehicle').click(function(event) {
+		event.preventDefault();
+		if ($(this).data('href')) {
+			window.location = $(this).data('href');
+		}
+	});
 };
 
 var Trailer = Trailer || {};

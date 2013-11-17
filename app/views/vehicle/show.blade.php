@@ -105,13 +105,16 @@
 	</div>
 	@if ($isMember)
 	<p>
+		<button class="btn btn-primary book-vehicle" 
+				data-href="{{ action('BookingController@create', array($vehicle->id)) }}">
+			Boka
+		</button>
 		@if ($isAdmin)
 		<button class="btn btn-primary admin-vehicle" 
 				data-href="{{ action('VehicleController@edit', array($vehicle->id)) }}">
 			<span class="glyphicon glyphicon-cog"></span> Administrera
 		</button>
 		@endif
-		<!--<button class="btn btn-primary">Boka</button>-->
 	</p>
 	@endif
 @stop
