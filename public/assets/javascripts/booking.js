@@ -7,9 +7,11 @@ function Booking() {
 		}
 	});
 	
-	$('.start-date').datepicker('setStartDate', new Date()).on('changeDate', function(event) {
-		$('.end-date').datepicker('setStartDate', event.date);
-	});
+	if (!Modernizr.inputtypes.date) {
+		$('.start-date').datepicker('setStartDate', new Date()).on('changeDate', function(event) {
+			$('.end-date').datepicker('setStartDate', event.date);
+		});
+	}
 };
 
 var Trailer = Trailer || {};
