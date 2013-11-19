@@ -1,4 +1,7 @@
 function Booking() {
+	if ($('#wholeday').is(':checked')) {
+		$('input[type=time]').attr('disabled', true);
+	}
 	$('#wholeday').change(function(event) {
 		if ($(this).is(':checked')) {
 			$('input[type=time]').attr('disabled', true);

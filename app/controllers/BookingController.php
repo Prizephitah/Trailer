@@ -30,8 +30,8 @@ class BookingController extends BaseController {
 		$rules = array(
 			'start.date' => 'required|date_format:Y-m-d',
 			'end.date' => 'required|date_format:Y-m-d|end_date:start.date',
-			'start.time' => array('required', 'regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/'),
-			'end.time' => array('required', 'regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/')
+			'start.time' => array('regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/'),
+			'end.time' => array('regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/')
 		);
 		$messages = array(
 			'required' => 'Fältet är obligatoriskt.',
@@ -40,6 +40,9 @@ class BookingController extends BaseController {
 			'regex' => 'Klockslaget måste vara på formatet HH:MM.'
 		);
 		$validator = Validator::make(Input::all(), $rules, $messages);
+		$validator->sometimes(array('start.time', 'end.time'), 'required', function($input) {
+			return !isset($input->wholeday);
+		});
 		if ($validator->fails()) {
 			return Redirect::action('BookingController@create', array($vehicleId))
 					->withErrors($validator)->withInput(Input::all());

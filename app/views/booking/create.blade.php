@@ -14,7 +14,7 @@
 			<div class="col-md-2">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="wholeday" id="wholeday" />
+						<input type="checkbox" name="wholeday" @if (Input::old('wholeday') != null) checked @endif id="wholeday" />
 						Heldag
 					</label>
 				</div>
