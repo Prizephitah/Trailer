@@ -57,6 +57,22 @@ class BookingController extends BaseController {
 					->withInput(Input::all());
 		}
 		
+		$conflictingBookings = Booking::
+				where('vehicle_id', '=', $vehicle->id)
+				->where(function($query) use ($startDate, $endDate) {
+					$query->where('start', '<', $endDate)
+						->where('end', '>', $startDate);
+				})
+				->orderBy('start', 'asc')
+				->get();
+		if (!$conflictingBookings->isEmpty()) {
+			return Redirect::action('BookingController@create', array($vehicleId))
+					->withErrors(array('start.date' => true, 'end.date' => true))
+					->withInput(Input::all())
+					->with('conflictingBookings', $conflictingBookings)
+					->with('danger', 'Bokningen krockar med en eller flera andra befintliga bokningar.');
+		}
+		
 		$booking = new Booking();
 		$booking->user()->associate(Auth::user());
 		$booking->vehicle()->associate($vehicle);

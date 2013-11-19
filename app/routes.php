@@ -39,7 +39,7 @@ Route::get('/', array('before' => 'auth', 'do' => function() {
 			->join('users', 'bookings.user_id', '=', 'users.id')
 			->where('groups_users.user_id', '=', Auth::user()->id)
 			->where('bookings.end', '>', new DateTime())
-			->orderBy('bookings.start', 'desc')
+			->orderBy('bookings.start', 'asc')
 			->get();
 	$upcommingBookings = array();
 	$ongoingBookings = array();

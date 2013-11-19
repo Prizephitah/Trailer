@@ -3,6 +3,9 @@
 @section('content')
 @include('navbar')
 <div class="container">
+	@if(Session::has('danger'))
+		<div class="alert alert-danger">{{ Session::get('danger') }}</div>
+	@endif
 	<div class="page-header">
 		<h1>Boka {{{ $vehicle->name }}}</h1>
 	</div>
@@ -29,6 +32,7 @@
 								</span>
 							</div>
 							@foreach ($errors->get('start.date') as $error)
+							@if ($error == '1') <?php continue; ?> @endif
 							<span class="help-block">{{{ $error }}}</span>
 							@endforeach
 						</div>
@@ -60,6 +64,7 @@
 								</span>
 							</div>
 							@foreach ($errors->get('end.date') as $error)
+							@if ($error == '1') <?php continue; ?> @endif
 							<span class="help-block">{{{ $error }}}</span>
 							@endforeach
 						</div>
@@ -83,10 +88,40 @@
 			<div class="col-md-10 col-md-offset-2">
 				<div class="form-group">
 					<label for="createbooking-comment">Notering</label>
-					<textarea class="form-control" id="createbooking-comment" name="comment"></textarea>
+					<textarea class="form-control" id="createbooking-comment" name="comment"
+							  >{{{Input::old('comment')}}}</textarea>
 				</div>
 			</div>
 		</div>
+		@if (Session::has('conflictingBookings'))
+		<div class="row">
+			<div class="col-md-10 col-md-offset-2">
+				<label>Krockande bokningar</label>
+				<ul class="list-group">
+					@foreach (Session::get('conflictingBookings') as $booking)
+					<li class="list-group-item">
+						<h4>
+							<a href="{{ action('BookingController@show', array($booking->id)) }}">
+							{{{ $booking->vehicle->name }}}
+							</a>
+							<small>
+								{{ date('Y-m-d H:i', strtotime($booking->start)) }} &mdash; 
+								{{ date('Y-m-d H:i', strtotime($booking->end)) }}
+							</small>
+						</h4>
+						<dl>
+							<dt>Bokad av</dt>
+							<dd>{{{ $booking->user->name }}}</dd>
+						</dl>
+						@if ($booking->comment)
+						<p>{{{ $booking->comment }}}</p>
+						@endif
+					</li>
+					@endforeach
+				</ul>
+			</div>
+		</div>
+		@endif
 		<div class="row">
 			<div class="col-md-10 col-md-offset-2">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
