@@ -28,7 +28,7 @@ class BookingController extends BaseController {
 		}
 		
 		$rules = array(
-			'start.date' => 'required|date_format:Y-m-d',
+			'start.date' => 'required|date_format:Y-m-d|after:'.date('Y-m-d', strtotime('-1 day')),
 			'end.date' => 'required|date_format:Y-m-d|end_date:start.date',
 			'start.time' => array('regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/'),
 			'end.time' => array('regex:/([01]?[0-9]|2[0-3]):[0-5][0-9]/')
@@ -36,6 +36,7 @@ class BookingController extends BaseController {
 		$messages = array(
 			'required' => 'Fältet är obligatoriskt.',
 			'date_format' => 'Datumet måste vara på formatet ÅÅÅÅ-MM-DD.',
+			'after' => 'Datumet måste vara senare än :date.',
 			'end_date' => 'Slutdatumet får inte vara före startdatumet.',
 			'regex' => 'Klockslaget måste vara på formatet HH:MM.'
 		);
