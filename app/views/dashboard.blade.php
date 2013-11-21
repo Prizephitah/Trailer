@@ -13,7 +13,7 @@
 		<div class="alert alert-info">{{ Session::get('info') }}</div>
 	@endif
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 hidden-xs">
 			<div class="page-header">
 				<h2>
 					Dina grupper
